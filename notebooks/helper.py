@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import math
 import networkx as nx
-from typing import Callable, Optional, Tuple, Union, List  # you will need all of them in your code
+from typing import Callable, Optional, Tuple, Union, List  
 
 
 def NodesCreation(ids: str, label:str) -> dict:
@@ -13,10 +13,6 @@ def NodesCreation(ids: str, label:str) -> dict:
     ----------
     ids: the columns which will be used as attributes
     label: the node's label 
-
-    Returns
-    --------
-
     '''
     d = {'id': ids, 'label': [label]*len(ids)}
     df = pd.DataFrame(d)
@@ -36,10 +32,6 @@ def AddSimpleEdge(df: pd.DataFrame, columns: List, graph: nx.MultiDiGraph, label
     columns: the columns for the edge
     graph: the graph name
     label: the label of the edge added as attribute
-
-    Returns
-    --------
-
     '''
     d = dict(zip(df[columns[0]], df[columns[1]]))
 
@@ -60,10 +52,6 @@ def NewColumn(x: pd.Series)-> List:
     Parameters
     ----------
     x: dataframe's row
-
-    Returns
-    --------
-
     '''
     a = [i if i else None for i in x]
     b = [item for item in a if not(type(item)==float and (math.isnan(item)) == True)]
@@ -78,10 +66,6 @@ def EdgesView(graph: nx.MultiDiGraph , nodes: List) -> dict:
     ----------
     graph: the graph network
     nodes: the nodes of the graph to search the edges for
-
-    Returns
-    --------
-
     '''
     d1 = {}
     for i in nodes:
