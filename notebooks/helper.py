@@ -80,7 +80,7 @@ def EdgesView(graph: nx.MultiDiGraph , nodes: List) -> dict:
 
     return d1
 
-def GraphQuerying(graph: nx.MultiDiGraph, source:str, target:str, in_between:str) -> List:
+def GraphQuerying(graph: nx.MultiDiGraph, source:str, target:str, in_between:str) -> dict:
     '''
     searching and presenting the target nodes connected to the source node 
 
@@ -88,10 +88,12 @@ def GraphQuerying(graph: nx.MultiDiGraph, source:str, target:str, in_between:str
     ----------
     graph: the graph network
     source: the node we want to seacrh for its targets, as argument the id
-    target: the targeted nodes, as argument the label
-    in_between: the node connection of source and targets
+    target: the targeted nodes, as argument the node's label
+    in_between: the node connection of source and targets, as argument the node's label
     '''
-
-    connection_nodes = [conn_node for conn_node in graph.to_undirected().neighbors(source) if graph.nodes[conn_node]['label'] == in_between]
+    querry = {}
     
-    return [node for conn_node in connection_nodes for node in graph.to_undirected().neighbors(conn_node)  if str(node)[0:4]== target]
+    connection_nodes = [conn_node for conn_node in graph.to_undirected().neighbors(source) if graph.nodes[conn_node]['label'].lower() == in_between.lower()]
+    querry[source]=  [node for conn_node in connection_nodes for node in graph.to_undirected().neighbors(conn_node)  if graph.nodes[node]['label'].lower() == target.lower()]
+    
+    return querry
