@@ -80,3 +80,18 @@ def EdgesView(graph: nx.MultiDiGraph , nodes: List) -> dict:
 
     return d1
 
+def GraphQuerying(graph: nx.MultiDiGraph, source:str, target:str, in_between:str) -> List:
+    '''
+    searching and presenting the target nodes connected to the source node 
+
+    Parameters
+    ----------
+    graph: the graph network
+    source: the node we want to seacrh for its targets, as argument the id
+    target: the targeted nodes, as argument the label
+    in_between: the node connection of source and targets
+    '''
+
+    connection_nodes = [conn_node for conn_node in graph.to_undirected().neighbors(source) if graph.nodes[conn_node]['label'] == in_between]
+    
+    return [node for conn_node in connection_nodes for node in graph.to_undirected().neighbors(conn_node)  if str(node)[0:4]== target]
