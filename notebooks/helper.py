@@ -80,7 +80,7 @@ def EdgesView(graph: nx.MultiDiGraph , nodes: List) -> dict:
 
     return d1
 
-def GraphQuerying(graph: nx.MultiDiGraph, source:str, target:str, in_between:str) -> dict:
+def PhyBenConnection(graph: nx.MultiDiGraph, source:str, target:str, in_between:str) -> dict:
     '''
     searching and presenting the target nodes connected to the source node 
 
